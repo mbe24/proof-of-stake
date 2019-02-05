@@ -1,0 +1,138 @@
+\documentclass{semdoc}
+% Template: $Id: t01_txt.tex,v 1.7 2000/05/23 12:13:37 bless Exp $
+% -----------------------------------------------------------------------------
+% Seminarbeitrag
+% -----------------------------------------------------------------------------
+% Kommentare beginnen mit einem %-Zeichen
+\docbegin
+% --> Oberhalb der Linie bitte nichts �ndern.
+% ---------------------------------------------------------------------------
+% \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ 
+% Stellen, an denen etwas geaendert werden soll, sind wie hier gekennzeichnet.
+% /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ 
+
+%
+% ---------------------------------------------------------------------------
+% \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ 
+% --> Bitte den Titel des Beitrages in die n�chste Zeile eintragen:
+\title{Proof of Stake}
+%
+% --> ... und den Namen des Autors:
+\author{Mikael Beyene}
+% --> optional eine URL mailto:... oder http://www...
+%\authorURL{}
+% /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ 
+% -----------------------------------------------------------------------------
+%
+%
+\maketitle
+
+\begin{abstract}
+\input{content/abstract.tex}
+\end{abstract}
+
+%\tableofcontents
+%
+% -----------------------------------------------------------------------------
+% ACHTUNG - ACHTUNG - ACHTUNG - ACHTUNG - ACHTUNG - ACHTUNG - ACHTUNG - ACHTUNG
+% -----------------------------------------------------------------------------
+% --> Im Text sollte \section der "h�chste" Gliederungsbefehl sein,
+%     also bitte kein \chapter oder gar \part verwenden.
+%     Der Text kann aber mit \section{}, \subsection{}, \subsubsection{}
+%     untergliedert werden.
+%
+%     Bitte nicht die Befehle \input oder \include verwenden, also den
+%     Text _nicht_ in mehrere Dateien aufteilen! 
+%
+%     \newpage oder manuelle Zeilenumbr�che (\\) sollten ebenfalls nicht 
+%     verwendet werden.
+%
+%     Bitte darauf achten, dass im _Quelltext_ ein Abschnitt nicht nur 
+%     in einer Zeile steht (das macht z.B. Word beim Exportieren ohne
+%     Zeilenumbruch), der Abschnitt sollte auch bei 80 Zeichen pro Zeile
+%     noch lesbar sein, d.h. Zeilenumbr�che im Quelltext bitte entsprechend
+%     einf�gen.
+%
+%     Referenzen auf andere Abschnitte sind bitte mit \ref{...}, wie 
+%     anschliessend gezeigt, anzugeben und nicht etwa als Text wie
+%     "siehe auch Abschnitt 2.2"
+%
+%     Anf�hrungszeichen sind nicht einfach so "Text" einzugeben, sondern so:
+%     "`Text"', andernfalls gibt es Fehler.
+%
+%     Das Zeichen ~ erzeugt einen Leerraum an dem aber nicht getrennt wird.
+%     Weitere Trennstellen:
+%     "- = zus�tzliche Trennstelle
+%     "| = Vermeidung von Ligaturen und m�gliche Trennung (bsp: Schaf"|fell)
+%     "~ = Bindestrich an dem keine Trennung erlaubt ist (bsp: bergauf und "~ab)
+%     "= = Bindestrich bei dem Worte vor und dahinter getrennt werden d�rfen
+%     "" = Trennstelle ohne Erzeugung eines Trennstrichs (bsp: und/""oder)
+%
+%     Weiterer Hinweis: 
+%     KEIN Glossar erstellen! Abk�rzungen sind im Text zu erkl�ren!
+%     Der Text ist mit z.B. mit ispell auf Schreibfehler zu pr�fen 
+%     (am besten aus dem Emacs heraus, 
+%     Men�: Edit -> Spell -> Select Deutsch8, dann Edit -> Spell -> Check Buffer)
+%
+% ---------------------------------------------------------------------------
+% \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ 
+% --> ... und hier kommt der Text: 
+
+\section{Einf\"uhrung} % in die Klammern die Ueberschrift 
+\label{tmp_introduction} % und ein Label
+% Das Label ist eine Marke, auf die man sp�ter mit \ref{labelname} verweisen kann.
+% BITTE ALLE LABELS MIT t01_ BEGINNEN.
+
+\input{content/introduction.tex}
+
+\section{Begriffskl\"arung}
+
+\input{content/definition.tex}
+
+\section{Grundlagen}
+
+\input{content/fundamentals.tex}
+
+\section{Ans\"atze}
+
+\input{content/approaches.tex}
+
+% IOHK presents at Oxford University: Ouroboros: A Provably Secure Proof-of-Stake Blockchain Protocol
+% https://www.youtube.com/watch?v=Nlmv4fg4NQk
+% Cardano
+% https://www.youtube.com/watch?v=Do8rHvr65ZA
+
+\section{Evaluierung}
+\input{content/evaluation.tex}
+
+\section{Ausblick}
+\input{content/outlook.tex}
+
+%%
+% F�r Flattersatz in Tabellenspalten:
+% \newcolumntype{z}{>{\PBS{\raggedright\hspace{0pt}}}p{5cm}}
+% statt p{5cm} einfach z verwenden, z.B. \begin{tabular}{|l||c|r|z|}
+% F�r graue Tabellenspalten (z.B. zentrierter Text):
+% \newcolumntype{g}{>{\columncolor[gray]{0.8}}c} % grau
+% \newcolumntype{G}{>{\columncolor[gray]{0.9}}c} % helleres grau
+% \begin{tabular}{|l||c|G|g|} oder auch \multicolumn{4}{|g|}{Eine ganze Zeile}
+% Aber Achtung: Im xdvi werden graue Zeilen nicht korrekt dargestellt, erst
+% im PostScript- oder PDF-Dokument bzw. Ghostview.
+%
+% /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ 
+%
+% --> �blicherweise wird nur die Literatur aufgelistet, die auch referenziert
+%     wird. M�chte man auch nichtreferenzierte Literatur einschlie�en, so
+%     kann man dies mit \nocite{<citelabel>} tun.
+%\nocite{*}
+%     In die folgende Zeile sollte die ben�tigte Literaturdatenbankdatei
+%     eingetragen werden (im Normalfall nicht zu �ndern):
+
+% \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ 
+% Sollte noch zus�tzliche Literatur verwendet worden sein, dann bitte die 
+% folgende Zeile auskommentieren.
+\bibliography{literature}
+% /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ 
+%
+\docend
+%%% end of document

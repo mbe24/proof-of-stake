@@ -1,0 +1,265 @@
+Der Schwerpunkt der Evaluierung liegt, nach einer kurzen Einführung von Metriken, auf der Diskussion von Vorteilen und Nachteilen, sowie der Betrachtung einiger Angriffe. Soweit möglich im Vergleich zu PoW; bei neueren PoS-spezifischen Angriffen lediglich dediziert.
+
+\subsection{Merkmale von Proof-of-Stake-Protokollen}
+
+Da hochwertiger Zufall, z.B. durch MPC-Protokolle, teure Berechnungen oder externe Abhängigkeiten erfordert, wird oft auf Pseudozufall zurückgegriffen.
+
+Abhängig von der Qualität des verwendeten Zufalls, macht das Heranziehen der Merkmale \textit{Predictability} und \textit{Recency} zur Analyse Sinn \cite{pos_talk}.
+
+\subsubsection{Predictability}
+\label{subsec:predictabilit}
+
+Predictability wird unterteilt in \textit{D-Local Predictability und} \textit{D-Global Predictability}. Ein PoS-Protokoll ist \textit{d-local predictable}, wenn es einem Validator möglich ist $d$ Blöck im Voraus zu wissen, ob er berechtigt ist, den betrachteten Block zu validieren. 
+
+\begin{figure}[htb] 
+	\centerline{\includegraphics*[width=0.8\textwidth]{img/predictability}}
+\caption{Predictability}
+\label{fig:predictability}
+\end{figure}
+
+Wenn es möglich ist für jeden beliebigen Validator herauszufinden, ob dieser in $d$ Blöcken berechtigt ist zu validieren, wird von \textit{D-Global Predictability} gesprochen.
+
+Jedes PoS-Protokoll ist \textit{1-local predictable}, d.h. ein Validator kann, und soll, herausfinden, ob er berechtigt ist den nächsten Block zu validieren.
+
+Bei PoS-Protokollen, welche Pseudozufall benutzen, um aus vorangegangen Informationen, wie z.B. Blockhashes, den Validator für künftige Blöcke zu bestimmen, kann die Predictibility helfen die Chance auf das Recht der Validierung künftiger Blöcke zu erhöhen. 
+Erstellte Blöcke können überprüft und erst im Netzwerk propagiert werden, wenn sie hinsichtlich der Predictability optimal sind. Diese Eigenschaft kann auch bei Angriffen genutzt werden.
+
+\subsubsection{Recency}
+\label{subsec:recency}
+
+Das Merkmal Recency ist eine Negation der Predictability. \textit{D-Recency} besagt somit, dass es für eine Partei nicht möglich ist $d$ Blöcke im Voraus herauszufinden, ob sie berechtigt ist den nächsten Block zu validieren.
+
+\begin{figure}[htb] 
+	\centerline{\includegraphics*[width=0.8\textwidth]{img/recency}}
+\caption{Recency}
+\label{fig:recency}
+\end{figure}
+
+Die notwendigen Informationen zur Ermittlung der Berechtigung ergeben sich lediglich aus dem jüngsten Verlauf. Abbildung \ref{fig:recency} zeigt die schematische Darstellung eines \textit{2-recent} PoS-Protokolls. 
+
+\subsection{Vor- und Nachteile von Proof-of-Stake-Protokollen}
+
+Im folgenden die Vor- und Nachteile von Proof-of-Stake-Protokollen. Nicht in jedem Fall sind diese klar ersichtlich. Oftmals sind es Trade-Offs wie z.B. bei der Gestaltung der Anreize. Ausschlaggebend ist in diesen Fällen die Präferenz des Protokolldesigners.
+
+\subsubsection{Energieverbrauch und Hardwarekosten}
+
+Wie eingangs erwähnt hatte alleine Bitcoin im Jahre 2017 einen Energieverbrauch von 29 TWh. Bei einem Strompreis von 29 ct./kWh\footnote{Statistik entnommen aus \url{http://ec.europa.eu/eurostat/statistics-explained/index.php/Electricity_price_statistics/de}} sind das 8,41 Mrd. Euro. Natürlich findet Mining nicht nur in Deutschland, oder Europa, statt. Daher müssen regional unterschiedliche Preise angesetzt werden, es soll hier nur die Größenordnung verdeutlicht werden.
+
+Zusätzlich zu den Stromkosten, fallen auch Hardwarekosten an.
+Grafikkarten eigenen sich ebenfalls zum Minen und so stiegen mit der Beliebtheit der Kryptowährungen auch die Preise der Grafikkarten und es sank deren Verfügbarkeit. 
+
+Der Bedarf ist so groß, dass es sogar teure Eigenentwicklungen speziell zum Minen gibt, welche auf sog. ASICs (Application-Specific Integrated Circuits) basieren. 
+Ein Beispiel dafür ist der \textit{Antminer\footnotemark} von Bitmain für über Zweitausend Dollar.
+\footnotetext{\url{https://shop.bitmain.com/antminer_s9_asic_bitcoin_miner.htm}}
+
+
+\subsubsection{Bootstrapping Problem}
+\label{subsec:bootstrapping}
+
+Das Bootstrapping Problem im PoS-Kontext entsteht dadurch, dass das Staking, welches notwendig ist um die Transaktionen innerhalb der Kryptowährung als Validator zu bearbeiten, selbst diese Kryptowährung benötigt.
+Initial ist es also nicht ohne Weiteres möglich zu staken.
+
+Ein Ausweg ist es die Münzen zu verkaufen. Dieser initiale Verkauf, der nicht nur PoS-Währungen vorbehalten ist, gleicht einem \textit{Initial Public Offering (IPO)} und wird bei Kryptowährungen \textit{Initial Coin Offering (ICO)} genannt. 
+
+Im Gegensatz zum PoW-Münzen bei denen alle Interessenten gleichberechtigt minen können, sind bei ICOs die Entwickler bzw. Verkäufer der Münzen im  Vorteil.
+
+Eine andere Möglichkeit ist das initiale Nutzen von PoW zur Ausschüttung der Münzen und ein späterer Umstieg auf PoS \cite[S. 12f.]{cwo_pow}.
+
+\subsubsection{Anreize}
+\label{subsec:incentives}
+
+Die Gestaltung der Anreize in Bitcoin ist unterteilt in positive Anreize, wie dem Block Reward und den Transaktionsgebühren, sowie den negativen Anreizen in Form von Prozessorzeit und Elektrizitätskosten \cite[S. 4]{bitcoin}.
+
+Diese negativen Anreize fallen jedoch immer an und sind nicht explizit mit bestimmten Aktionen verbunden. Minen, egal zu welchem Zweck, ist ein inhärent teurer Prozess. 
+
+Proof of Stake enthält die impliziten negativen Anreize des Minings nicht und kann bzw. muss diese daher explizit designen, um bei rational handelnden Spielern ein -- für den Verlauf des Protokolls -- wünschenswertes Verhalten zu generieren.
+
+Negative Anreize sind immer mit dem Verlust von Teilen oder des ganzen Stakes verbunden. Dies wird im Falle der Kryptowährung \textit{Ethereum}, im sich aktuell in Entwicklung befindlichen PoS-Protokoll \textit{Casper}, Slashing genannt \cite[S. 4f.]{casper_ffg}. 
+
+Diese gewonnene Freiheit bei der Gestaltung der Anreize geht jedoch mit einer Steigerung der Komplexität einher.
+
+\subsubsection{Kontrolle über Ausgabe der Münzen}
+
+Eine Konsequenz der impliziten negativen Anreize in Proof-of-Work-Protokollen ist, dass auch die ehrliche Ausführung des Protokolls mit Kosten verbunden ist.
+Miner müssen, zusätzlich zum Profit den sie erzielen wollen, diese hohen Kosten decken. 
+Dafür stehen Transaktionsgebühren und der Block Reward zur Verfügung. Diese müssen also zumindest so hoch sein um die anfallenden Kosten (Stromkosten, Hardwarekosten, etc.) zu decken. Das schränkt die freie Kontrolle über die Ausgabe der Münzen ein. Dies betrifft auch die negative Ausgabe, also zum Beispiel das Zerstören der gezahlten Transaktiongebühren für deflationäre Effekte.
+
+Validatoren in Proof-of-Stake-Protokolle haben vernachlässigbare Strom und Hardwarekosten, dies gewährt PoS-Protokollen deutlich mehr Freiheit bei der Gestaltung der positiven und negativen Ausgabe.
+
+\subsubsection{Risiko der Zentralisierung}
+
+Das Risiko der Zentralisierung ist beim PoS-Protokollen geringer. 
+Dies rührt daher, dass in Kryptowährungen, welche auf Proof of Work setzen, großes Kapital von Effekten der Massenproduktion profitieren kann.
+Die geringen Stückpreise führen in letzter Instanz zu überproportionaler Rechenleistung im Miningmarkt.\footnote{Vitalik Buterin und andere. Proof of Stake FAQ. \url{https://github.com/ethereum/wiki/wiki/Proof-of-Stake-FAQ}, aufgerufen am 28. Februar 2018}
+
+Zusätzlich zur Zentralisierung zum Kapital hin, findet auch eine Zentralisierung hin zu günstigen Stromkosten statt \cite[S. 4]{nxt}.
+
+PoS-Systeme sind von diesen Risiken jedoch nicht betroffen. Validatoren werden nur anteilig an ihrem Stake bezahlt bzw. gewählt den Block zu validieren. Ihnen steht somit auch, je nach Design des Protokolls, nur anteilig zu Transaktionsgebühren und Block Reward zu gewinnen. Der Return of Invest ist also für alle Teilnehmer gleich.
+
+\subsubsection{Asymetrisches Verhältnis von Angriffs- und Verteidigungskosten}
+
+In einem Angriff wie in Abschnitt \ref{subsec:attack} beschrieben setzt in einem PoW-Kontext der Angreifer seine Rechenleistung ein, um -- entgegen der Rechenleistung des Netzwerkes -- eine längere Blockchain zur Verfügung zu stellen.
+
+Die Kosten für einen Angreifer belaufen sich dabei auf die Stromkosten und ggf. noch die Opportunitätskosten wegen entgangener Block Rewards, falls der Angriff fehlschlägt.
+
+Der Rechenleistung des Angreifers muss in gleichem Maße Rechenleistung auf der Seite der Verteidiger entgegengesetzt werden. Diese Symmetrie fehlt bei Angriffen auf Proof-of-Stake-Protokolle. Durch die Gestaltung der Anreize ist es möglich Strafen für unerwünschte Aktionen zu definieren, die zum Verlust von Teilen oder des komplettes Stakes des Angreifers führen. 
+
+Der Aufwand auf der Seite der Verteidiger liegt nur darin den Angriff zu bemerken und die Mechaniken des Protokolls in Gang zu setzen, die zum Verlust des Stakes beim Anreifer führen (z.B. \textit{Evidence Transactions} bei Tendermint).
+Es kann hier also eine Asymmetrie festgestellt werden\footnotemark.
+
+\footnotetext{Vitalik Buterin. A Proof of Stake Design Philosophy. \url{https://medium.com/@VitalikButerin/a-proof-of-stake-design-philosophy-506585978d51}, aufgerufen am 28. Februar 2018}
+
+\subsubsection{Ansprüche an die IT-Sicherheit}
+
+Angriffe auf die Systeme eines Miners oder eines Validators, d.h. insbesondere die Fremdsteuerung, um z.B. einen Fork zu erstellen, sind durch die negativen Anreize mit Kosten verbunden. 
+Diese wurden im vorangegangenen Abschnitt besprochen. 
+
+Aus dem asymetrischen Verhältnis, welches vorteilhaft ist, um Anreize für gewünschte Verhaltensweisen zu bieten, ergibt sich in einem Proof-of-Stake-Kontext auch ein höheres Risiko im Falle eines unverschuldeten Fehlverhaltens.
+Daher sollte dieses Risiko dementsprechend durch Versicherungen oder Investitionen in die IT-Sicherheit bedacht werden.
+
+
+
+\subsection{Angriffe}
+
+Es gibt diverse Angriffe auf PoS-Protokolle, einige wurden dabei von den PoW-Protokollen geerbt, es gibt jedoch auch spezifische Angriffe auf Proof of Stake.
+
+\subsubsection{Predictable Selfish Mining}
+\label{subsec:selfishmining}
+
+Selfish Mining existierte schon zuvor als Angriff auf PoW-Protokolle.
+Der Vorteil gegenüber den ehrlichen Minern wird beim Selfish Mining daraus bezogen, dass die ehrlichen Miner gezwungen werden Rechenzeit auf einem überholten öffentlichen Branch zu verschwenden.
+
+Dies geschieht indem ein Miner, welcher einen Block gefunden hat, die Propagation des Blocks im Netz hinauszögert. Die anderen Miner werden dadurch gezwungen weiterhin auf dem alten Block zu minen. 
+
+\begin{figure}[htb] 
+	\centerline{\includegraphics*[width=0.6\textwidth]{img/selfish_mining}}
+\caption{Selfish Mining Angriff}
+\label{fig:selfish_mining}
+\end{figure}
+
+Der so erlangte Vorsprung kann genutzt werden, um nun nach einem neuen Block zu suchen. Der Angriff ist für den Selfish Miner mit dem Risiko behaftet selbst Rechenzeit zu verschwenden, falls ein Block gefunden wird, bevor er seinen vorgehaltenen Block veröffentlicht \cite[S. 440ff.]{btc_selfishmining} \cite[S. 6ff.]{subversive_strategies}.
+
+Durch Local Predictability kann das eigene Risiko minimiert werden, indem die Blöcke so gestaltet werden, damit die Chance auf die Berechtigung den nächsten Block validieren zu können steigt (siehe auch \textit{Stake Grinding} in Abschnitt \ref{subsec:grinding}).
+
+Protokolle mit hoher Global Predictability erlauben eine noch bessere Abschätzung des Risikos, indem Informationen über andere Parteien ebenfalls in die Betrachtung des Risikos einbezogen werden können. Durch Angriffe auf diese Ziele kann dieses Risiko sogar beeinflusst werden.
+
+\subsection{Predictable Double Spending}
+\label{subsec:doublespending}
+
+Double Spending ist ebenfalls schon als Angriff auf Bitcoin bekannt und tatsächlich sogar der Grund wieso Bitcoin bzw. Proof of Work in diesem Kontext überhaupt existiert. Vor Bitcoin gab es keine Möglichkeit dieses Problem ohne das Hinzuziehen vertrauenswürdiger Drittparteien zu lösen. 
+
+Beim Double Spending geht es darum gültige Transaktionen umzukehren, indem ein Branch veröffentlicht wird, welcher eine Transaktion enthält, die im Konflikt steht \cite[S. 45]{ouroboros}.
+
+\begin{figure}[htb] 
+	\centerline{\includegraphics*[width=0.8\textwidth]{img/double_spending}}
+\caption{Double Spending Angriff}
+\label{fig:double_spending}
+\end{figure}
+
+Abbildung \ref{fig:double_spending} verdeutlicht das. Zwischen Block 0 und 1 wird eine Transaktion getätigt, welche Währungseinheiten, im Tausch für Ware oder andere Kryptowährungen, verkauft. Diese Transaktion ist im grünen Block 1 enthalten.
+Wenn die Ware erhalten ist, wird der längerer rote Fork veröffentlicht, welcher eine Transaktion enthält, die im Konflikt steht.
+
+Es ist nicht notwendig für den Angreifer den längeren Branch selbst zu minen. In sog. \textit{Bribe Attacks} wird anderen Minern eine Bestechung gezahlt um den eigenen Branch zu minen. Dies kann helfen den Angriff effizienter zu gestalten, wenn die Kosten für die Bestechung geringer sind als die Stromkosten, die beim alleinigen Minen entstehen würden \cite[S. 3]{cwo_pow}.
+
+Im Proof-of-Stake-Kontext sind die Kosten für einen Angriff geringer, wenn es keine weiteren Mechanismen zur Verhinderung gibt. 
+Es können sich also auch Double-Spending-Angriffe über länger Zeiträume hinweg, \textit{Longe-Range Revision Attack} genannt, lohnen. Dort ist es nicht einmal notwendig, dass der Angreifer den Stake zum aktuellen Zeitpunkt überhaupt noch hält.
+
+Angriffe die darauf abzielen einen anderen Branch zu veröffentlichen, können durch das Konzept der Finalization verhindert werden \cite[S. 5]{casper_ffg}.
+
+\subsubsection{Stake Grinding}
+\label{subsec:grinding}
+
+In Stake-Grinding-Angriffen wird versucht den Zufall, durch welchen die Berechtigung einen Block zu validieren bestimmt wird, zu beeinflussen -- kurz: den Leader Election Process.
+Es werden verschiedene Blockheader getestet, um so die Chance zu erhöhen. 
+
+Dieser Vorgang gleicht in gewisser Weise dem Mining bei Proof-of-Work-Protokollen.
+Diese sind nicht anfällig für Stake-Grinding-Angriffe, da dort der Zufall nicht beeinflusst werden kann.
+Proof-of-Stake-Protokolle, welche externen Zufall benutzen oder Zufall durch MPC-Protokolle generieren, sind ebenfals nicht anfällig für diese Art von Angriffen \cite[S. 46]{ouroboros}.
+
+\subsubsection{Nothing at Stake}
+\label{subsec:nothing_stake}
+
+Nothing at Stake beschreibt eine Situation in welcher rationale Miner oder Validatoren mehrere Branches vorfinden und analysieren welchen sie -- oder sogar, ob sie beide -- minen bzw. validieren sollen.
+
+\paragraph{Nothing at Stake im Proof-of-Work-Kontext}
+
+Die Bezeichnung Nothing at Stake ist bei Proof of Work etwas irreführend, da zu jedem Zeitpunkt die Rechenzeit (bzw. der ökonomische Wert der Rechenzeit) "`at Stake"', also eingesetzt, ist.
+
+\begin{figure}[htb] 
+	\centerline{\includegraphics*[width=0.8\textwidth]{img/ns_pow}}
+\caption{Nothing at Stake in einem Proof-of-Work-Kontext\protect\footnotemark}
+\label{fig:ns_pow}
+\end{figure}
+
+\footnotetext{\label{fn:eth_faq}Quelle der Abbildung: Vitalik Buterin und andere. Proof of Stake FAQ. \url{https://github.com/ethereum/wiki/wiki/Proof-of-Stake-FAQ}, aufgerufen am 28. Februar 2018}
+
+Abbildung \ref{fig:ns_pow} zeigt dieses Szenario. Nach einem Fork sind zwei Branches zu sehen. Der linke Branch ist der Branch mit dem höheren Erwartungswert.
+
+Ein Miner hat nun vier Möglichkeiten:
+
+\begin{enumerate}
+    \item \textbf{Keinen Branch minen}\\
+    In dem Fall ist der Erwartungswert 0. Durch Inaktivität wird nicht am Leader Election Process teilgenommen.
+    
+    \item \textbf{Linken Branch minen}\\
+    Die Wahrscheinlichkeit den Leader Election Process zu gewinnen ist in beiden Branches gleich hoch. Für den linken Branch ist jedoch die Wahrscheinlichkeit höher Teil der kanonischen Blochchain zu sein. In diesem Fall ist die Arbeit, die in das Minen des linken Branches fließt, nicht verschwendet.
+    
+    \item \textbf{Rechten Branch minen}\\
+    Der rechte Branch hat eine geringere Chance Teil der kanonischen Blockchain zu sein. Arbeit, die hier in das Minen geht, ist somit weniger rentabel. Ein rationaler Miner wird also den linken Branch bevorzugen.
+    
+    \item \textbf{Beide Branches minen}\\
+    Beim Minen von beiden Branches teilt sich die verfügbare Rechenkraft auf zwei Branches auf. Somit entsteht ein Nachteil gegenüber den Minern auf der kanonischen Blockchain.
+\end{enumerate}
+
+Es lässt sich erkennen, dass außerhalb des Protokolles -- durch die entstehenden Kosten in der realen Welt -- negative Anreize gegeben sind. 
+Diese führen bei rationalen Minern, ohne weitere Maßnahmen dazu, die kanonische Blockchain zu minen bzw. den Branch bei dem die Zugehörigkeit zur dieser am höchsten eingeschätzt wird.
+
+\paragraph{Nothing at Stake im Proof-of-Stake-Kontext}
+
+Ohne explizite Maßnahmen dagegen erscheint Nothing at Stake im Proof-of-Stake-Kontext deutlich attraktiver, da die negativen Anreize, welchen durch das Mining gegeben sind, fehlen.
+
+Auch hier hat ein rationaler Validator vier Möglichkeiten zu reagieren:
+
+\begin{enumerate}
+    \item \textbf{Keinen Branch minen}\\
+    Wie im PoW-Bespiel macht es auch hier ökonomisch keinen Sinn sich zu enthalten.
+    
+    \item \textbf{Linken Branch minen}\\
+    Der linke Branch hat auch hier eine höhere Chance teil der kanonischen Blockchain zu sein, somit ist der Erwartungswert höher.
+    
+    \item \textbf{Rechten Branch minen}\\
+    Der rechte Branch hat eine niedrigere Chance teil der kanonischen Blockchain zu sein.
+    
+    \item \textbf{Beide Branches minen}\\
+    Da keine Rechenkraft aufgewandt werden muss, und bei Abwesenheit weiterer negativen Anreize, kann ein rationaler Validator den Erwartungswert erhöhen, wenn er in beiden Branches validiert. Somit geht das Risiko einen nicht-kanonischen Branch zu validieren auf Null.
+\end{enumerate}
+
+\begin{figure}[htb] 
+	\centerline{\includegraphics*[width=0.8\textwidth]{img/ns_pos}}
+\caption{Nothing at Stake in einem Proof-of-Stake-Kontext\protect\footnotemark} 
+\label{fig:ns_pos}
+\end{figure}
+
+\footnotetext{Siehe Fußnote \ref{fn:eth_faq}}
+
+Im Proof-of-Stake-Kontext wird sich nur ein altruistischer Validator verhalten wie im Falle von Proof of Work. 
+Auszugehen ist jedoch von rationalen Validatoren, die geleitet von ihrem ökonischen Interesse ihren Gewinn maximieren wollen. 
+Daher müssen diese sogar beide Branches validieren, wenn sie sich rational verhalten wollen \cite[S. 47f.]{ouroboros}.
+
+Um diese Nothing-at-Stake-Situation zu entschärfen, können negative Anreize eingeführt werden, z.B. das \textit{Slashing} im Falle von \textit{Ethereums} PoS-Protokoll \textit{Casper} \cite[S.1, S. 5f.]{casper_ffg}.
+
+\subsubsection{Catastrophic Crashes}
+
+BFT-style Proof-of-Stake-Algorithmen benötigten $2/3$ Mehrheiten für die Protokollausführung (z. B. für die Finalization). Sie sind daher besonders anfällig für Wegfall von Validatoren aus dem Netzwerk. Dies wird Catastrophic Crash genannt. Der Wegfall muss nicht unbedingt durch einen Angriff erfolgen, er kann auch durch Begebenheiten im Netz entstehen.
+
+\begin{figure}[htb] 
+	\centerline{\includegraphics*[width=0.8\textwidth]{img/cat_crashes}}
+\caption{Zu sehen ist die initiale Konfiguration der Stakes der Validatoren mit anschließendem Stake Draining.} 
+\label{fig:cat_crash}
+\end{figure}
+
+Abbildung \ref{fig:cat_crash} zeigt links eine Konfiguration von Validatoren anhand ihres Stakes.
+Es gibt vier Validatoren, zwei mit jeweils 17 \% Anteil (weiß und helles Grün) und zwei mit 33 \% Anteil (blau und dunkles Grün) am gesamten Stake.
+Nach Wegfall des weißen und blauen Validators können die beiden grünen Validatoren nur noch 50 \% der Stimmkraft aufbringen. Das BFT-style PoS-Protokoll kann so nun nicht mehr fortfahren.
+
+Durch Verringern der Stakes der inaktiven Validatoren, auch \textit{Stake Draining} genannt, ist es möglich wieder zu einer Konfiguration der Stakes zu kommen, in welcher wieder Mehrheiten erreicht werden können. Dies ist im rechten Teil von Abbildung \ref{fig:cat_crash} zu sehen \cite[S. 8f.]{casper_ffg}.

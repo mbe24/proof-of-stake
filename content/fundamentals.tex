@@ -1,0 +1,38 @@
+Proof of Stake mag im Kontext von Blockchains und Kryptowährungen zwar neu sein, die grundlegenden Konzepte unterscheiden sich jedoch wenig von schon vorhandener Forschung (z.B. im Bereich von verteilten Systemen). Auch gibt es viele Parallelen zum herkömmlichen Proof-of-Work-Ansatz.
+
+\subsection{Ablauf}
+
+Der Ablauf eines Proof-of-Stake-Protokolls lässt sich folgendermaßen unterteilen:
+
+\begin{enumerate}
+\item \textbf{Staken}\\
+Dies findet meist mit einer sog. \textit{Bond Transaction} statt. Durch das Wegsperren des Stakes wird der Menge der Validatoren beigetreten.
+
+\item \textbf{Leader Election Process}\\
+Nach dem Staken wird der Validator bestimmt. Dafür gibt es verschiedene Ansätze. Dies trifft insbesondere beim \textit{chain-based Proof-of-Stake}-Ansatz aus Abschnitt \ref{subsec:cb_pos} zu, welcher das Mining simuliert.
+
+\item \textbf{Anreizgesteuertes Verhalten}\\
+Durch das Koppeln von positiven und negativen Anreizen an bestimmte Aktionen kann das Verhalten von rationalen Validatoren gesteuert werden.  
+\end{enumerate}
+
+\subsection{Leader Election Process}
+
+Die in Abschnitt \ref{subsec:pow} erw"ahnte Zuteilung des nächsten Blocks, welche mit einer Wahrscheinlichkeit stattfindet, die proportional zur Rechenleistung des Miners ist, wird auch \textit{Leader Election Process} genannt. 
+Diese abstrakte Bezeichnung lässt die Anwedung im PoS-Kontext zu, dort wird der \textit{Leader} probabilistisch anhand seines Stakes aus der Menge der Validatoren gewählt.
+
+Manche Ansätze wählen die Belegung der Validatoren zu Beginn einer Epoche, andere wählen den Validator dediziert für jeden Slot.
+Für den Leader Election Process ist eine Quelle, die Zufall produziert, notwendig \cite[S. 1ff.]{ouroboros}.
+
+\subsection{Byzantine Fault Tolerance}
+
+Ein grundlegendes Problem in dezentralen, verteilten Systemen ist der Umgang mit dem Versagen einzelner Komponenten. 
+Dies wird abstrakt dargestellt im
+\textit{Problem der byzantinischen Generäle}, welches von Lamport, Shostak und Pease in \textit{The Byzantine Generals Problem} \cite{bgp82} beschrieben ist.
+
+Das Problem gibt ein Szenario vor in dem eine Gruppe von Gener\"alen eine Stadt belagert. Jeder General ist in der Lage den anderen Nachrichten per Bote zu schicken. Ziel ist es sich gemeinsam auf einen Schlachtplan zu einigen. Zur Auswahl stehen die Aktionen \textit{Angriff} und \textit{Rückzug}. 
+
+Die Parallele zum Versagen einzelner Komponenten in verteilten Systemen wird gezogen, indem ein Anteil der Generärele verräterisch agiert und somit die Konsensbildung erschwert.
+
+\textit{Byzantine Fault Tolerance (BFT)} bezeichnet die Eigenschaft von Systemen, welche im beschriebenen Kontext fehlertolerant sind. Die Obergrenze an bösartigen Spielern bzw. fehlerhaften Komponenten beträgt dabei $\frac{1}{3}$.
+
+Bezogen auf den Anwendungsfall hier stellen in dieser Analogie die einzelnen Validatoren die Komponenten dar, und das System bzw. das Verhalten des Gesamtsystems ist der Konsens bezüglich des nächsten Blocks.

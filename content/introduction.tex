@@ -1,0 +1,18 @@
+Im Folgenden soll eine Motivation für Proof of Stake und der Kontext der Anwendung durchleuchtet werden.
+
+\subsection{Bitcoin}
+
+Das revolutionäre am, im Jahre 2008 erschienen, Paper \textit{Bitcoin: A Peer-to-Peer Electronic Cash System} ist nicht die Anwendung von digitalen Signaturen für den eindeutigen Besitz von Münzen gewesen, sondern der Gebrauch von teuren Berechnungen, genannt \textit{Proof of Work (PoW)}, zum Protokollieren eines korrekten Transaktionsverlaufes. D.h. insbesondere die Verhinderung des sog. \textit{Double Spending}\footnote{Weiteres zu Double Spending in Abschnitt \ref{subsec:doublespending}} -- erstmals ohne das Hinzuziehen von vertrauenswürdigen Drittparteien \cite[S. 1, S. 8]{bitcoin}. Das Durchführen dieser Proof-of-Work-Berechnungen wird auch \textit{Mining} genannt.
+
+\subsection{Proof of Work und Energieverbrauch}
+\label{subsec:pow}
+
+Das Konzept des Proof of Works wurde als Kostenfunktion erstmals von Adam Back in \textit{Hashcash} als Gegenmaßnahme zu \textit{Denial-of-Service} Attacken vorgeschlagen. Wichtige Eigenschaften waren dabei eine parametrisierbar teure Kostenfunktion für die Rechnungen und das effiziente Verifizieren des Ergebnisses \cite[S.1]{hashcash}.
+
+Die teuren Berechnungen führten 2017, alleine bei Bitcoin, zu einem Energieverbrauch von 29 TWh\footnote{Siehe \url{https://powercompare.co.uk/bitcoin/}}. Diese Problematik wurde früh erkannt und so gab es schon 2011 erste Vorschläge, die darauf abzielten das Mining lediglich zu simulieren\footnote{Siehe auch \textit{Proof of stake instead of proof of work}, Beitrag von Nutzer QuatumMechanic und andere, \url{https://bitcointalk.org/index.php?topic=27787.0}}.
+
+In Proof-of-Work-Protokollen erhält der erste Teilnehmer, welcher eine akzeptierte Lösung der Kostenfunktion berechnet, dadurch implizit das Recht den nächsten Block vorzuschlagen und bekommt den Block Reward. 
+Auf diese Weise wird der nächste Block, und der dazugehörige Block Reward (bzw. das Recht den nächsten Block zu minen) probabilistisch und proportional zur Rechenleistung zugeteilt.
+Dieser Prozess ist inhärent \textit{zufällig} und bedarf keiner externen Entropie \cite[S. 2f.]{ouroboros}.
+
+\textit{Proof of Stake (PoS)} genannte Protokolle simulieren das Mining, indem das Recht auf den nächsten Block probabilistisch und proportional zu einer Art Pfand zugeteilt wird. Dieses Pfand wird von den Minern, bzw. deren Pendants, die in einem Proof-of-Stake-Kontext \textit{Validatoren} genannt werden, gestellt. 

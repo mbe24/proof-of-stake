@@ -1,0 +1,38 @@
+Dieser Abschnitt befasst sich mit der Definition einiger Begriffe, die für das Verständnis dieser Arbeit wichtig sind. Weitere Begriffe werden bei der Verwendung definiert oder ergeben sich aus dem Kontext. 
+
+\subsection{Staking}
+
+\textit{Stake} bezeichnet das Pfand, welches \textit{Validatoren} bezahlen.
+Kennzeichnend für dieses Stake ist, dass es in der Kryptowährung des Systems, das durch das Proof-of-Stake-Verfahren gesichert werden soll, bezahlt wird \cite[S. 1]{casper_ffg}. Dieser Vorgang kann als \textit{Staking} bezeichnet werden. Es lässt sich ein Henne-Ei-Problem erkennen.
+
+Das \textit{Bootstrapping} von Proof-of-Stake-Systemen ist im Gegensatz zu Proof-of-Work-Systemen nicht trivial \cite[S. 2]{cwo_pow}. 
+Miner können ihre Hardware zum Minen benutzen, Kryptowährung, die zum \textit{Staken} benötigt wird, ist initial jedoch noch nicht verteilt. 
+Auf dieses \textit{Bootstrapping Problem} wird in Abschnitt \ref{subsec:bootstrapping} näher eingegangen.
+
+\subsection{Slots und Epochen}
+
+Slots sind diskrete Einheiten von Zeit. Ein Block ist immer genau einem Slot zugeordnet. Eine feste Sequenz von Slots kann zu einer Epoche zusammengefasst werden. 
+\cite[S. 3ff.]{ouroboros}
+
+\subsection{Forks und Branches}
+
+Forks und Branches der Blockchain sind analog zu Bäumen in der theoretischen Informatik definiert. Zur Verdeutlichen zeigt Abbildung \ref{fig:branches} ein Beispiel aus Git.
+
+
+\begin{figure}[htb] 
+	\centerline{\includegraphics*[width=0.8\textwidth]{img/basic-branching-6}}
+\caption{Branches am Beispiel von Git\protect\footnotemark}
+\label{fig:branches}
+\end{figure}
+
+\footnotetext{Scott Chacon, Ben Straub. Pro Git. Abbildung 20. \url{https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging}, aufgerufen am 27. Feburuar 2018}
+
+Zu sehen sind eine Verkettung von \textit{Commits}, diese sollen Blöcken entsprechen. Nach Block $C2$ gab es einen Fork. Es gibt nun zwei Branches die mit $C4$ und $C5$ enden.
+
+Jedem Slot wird in der Regel ein Block zugeordnet, wenn keine Branches existieren. Die Ausnahmen bilden im Beispiel hier $C4$ und $C3$.
+
+\subsection{Angriff}
+\label{subsec:attack}
+
+Ein Angriff ist der Versuch eine alternative Blockchain, bzw. einen alternativen Branch, bereitzustellen, die aufgrund von Metriken wie z.B. der \textit{Longest Chain} Regel, von den anderen Teilnehmern im Netzwerk akzeptiert wird.
+Oder ein Versuch die Funktionsweise dieser Metriken zu stören.

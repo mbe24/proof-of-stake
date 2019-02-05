@@ -1,0 +1,44 @@
+Ansätze für Proof-of-Stake-Protokolle werden in chain-based PoS und BFT-style PoS unterschieden. Ersteres simuliert dabei das herkömmliche Mining, wohingegen letzteres einer Abstimmung gleicht.
+
+\subsection{Chain-based Proof of Stake}
+\label{subsec:cb_pos}
+
+In chain-based Proof-of-Stake-Protokollen, auch \textit{Blockchain Consensus} genannt, wird jedem Slot durch eine pseudozufällige Funktion ein Validator zugewiesen.
+Dies ist in Abbildung \ref{fig:chainbased} zu erkennen \cite[S. 1]{casper_cbc}.
+
+\begin{figure}[htb] 
+	\centerline{\includegraphics*[width=0.8\textwidth]{img/chainbased_pos}}
+\caption{Chain-based Proof of Stake} 
+\label{fig:chainbased}
+\end{figure}
+
+Ein Validator ist nun berechtigt einen Block zu stellen, der auf dem vorherigen Block aufbaut. Dies ist nicht immer eindeutig und bietet Potential für Nothing-at-Stake-Attacken (siehe dazu Abschnitt \ref{subsec:nothing_stake}) \cite[S. 1]{casper_ffg}.
+
+\subsection{BFT-style Proof of Stake}
+
+Diese Familie von Proof-of-Stake-Protokollen basiert auf BFT-Algorithmen zur Konsensbildung.
+Validatoren haben alle das Recht ihre Stimme für vorgeschlagene Blöcke abzugeben. Dies ist in Abbildung \ref{fig:bft_pos} zu erkennen.
+
+Das Recht Blöcke vorzuschlagen wird dabei zufällig vergeben. Durch das Abstimmen ist es möglich auch schon ohne Metriken wie der \textit{Longest Chain} Regel sicher zu sein, dass Konsens über Transaktionen bzw. über den Block in dem sie enthalten sind, herrscht\footnotemark \cite[S. 3]{bitcoin}. Dies wird auch als \textit{Finalization} bezeichnet \cite[S. 1f.]{casper_cbc}.
+
+\begin{figure}[htb] 
+	\centerline{\includegraphics*[width=0.8\textwidth]{img/bft_pos}}
+\caption{BFT-style Proof of Stake} 
+\label{fig:bft_pos}
+\end{figure}
+
+Typisch für BFT-Algorithmen können bis zu einem Drittel fehlerhafte (oder bösartige) Teilnehmer toleriert werden.
+\footnotetext{Vitalik Buterin und andere. Proof of Stake FAQ. \url{https://github.com/ethereum/wiki/wiki/Proof-of-Stake-FAQ}, aufgerufen am 28. Februar 2018}
+
+\subsection{Zufall}
+
+In PoW-Protokollen funktioniert der \textit{Leader Election Process} ohne weiteres Zutun zufällig (siehe auch Abschnitt \ref{subsec:pow}).
+Da dies in PoS-Protokollen fehlt, ist das Zuführen von Entropie notwendig \cite[S. 1f.]{ouroboros}.
+
+Dies kann auf verschiedene Weisen geschehen. Die einfachste Möglichkeit ist der Gebrauch eines externen Zufallsgenerators. Dies hat den Nachteil, dass eine externe Abhängigkeit geschaffen wird. Es entspricht auch nicht dem dezentralen Gedanken, welcher tief in der Philosophie hinter Kryptowährungen verankert ist.
+
+Durch Anwendung von \textit{Secure Multi-Party Computation (MPC)} innerhalb des Protokolls, kann auch qualitativ hochwertiger Pseudozufall erzeugt werden.
+MPC beschreibt eine Familie von Protokollen, welche benutzt wird, um Funktionen mit mehreren geheimen Eingabeparametern verteilt zu berechnen. Dabei will keine der Parteien, welche die Parameter beisteuern, dass ihre geheimen Parameter bekannt werden. Nachteil hier ist jedoch, dass solche Berechnungen meist teuer sind und dementsprechend auch Zeit in Anspruch nehmen \cite[S. 1]{mpc} \cite[S. 3]{ouroboros}.
+
+Eine andere Möglichkeit ist die Berechnung von Pseudozufall basierend auf angefallenen Daten, wie zum Beispiel Blockhashes etc., aus vorangegangen Blöcken. Ein Problem hierbei ist die Vorhersagbarkeit des Zufalls. 
+Mehr dazu in den folgenden Abschnitten \ref{subsec:predictabilit} und \ref{subsec:recency}.
